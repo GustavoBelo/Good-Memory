@@ -68,16 +68,16 @@
 		AA0BEC712606BF1900549F18 /* Good Memory */ = {
 			isa = PBXGroup;
 			children = (
-				AAE0662026081964005FC469 /* Array+Identifiable.swift */,
-				AAE0662326081A55005FC469 /* Array+Only.swift */,
-				AAFDD6C32606CD8900C12E1A /* Pie.swift */,
-				AAFDD6C02606CB9B00C12E1A /* Cardify.swift */,
-				AA0BEC722606BF1900549F18 /* Good_MemoryApp.swift */,
 				AA0BEC742606BF1900549F18 /* EmojiMemoryGameView.swift */,
+				AAFDD6C02606CB9B00C12E1A /* Cardify.swift */,
+				AAFDD6C32606CD8900C12E1A /* Pie.swift */,
 				AAFDD6C72606D02100C12E1A /* EmojiMemoryGame.swift */,
 				AAE0661A2608142C005FC469 /* MemoryGame.swift */,
+				AA0BEC722606BF1900549F18 /* Good_MemoryApp.swift */,
 				AAE065FA26081188005FC469 /* Grid.swift */,
 				AAE0661D26081911005FC469 /* GridLayout.swift */,
+				AAE0662026081964005FC469 /* Array+Identifiable.swift */,
+				AAE0662326081A55005FC469 /* Array+Only.swift */,
 				AA0BEC762606BF1900549F18 /* Assets.xcassets */,
 				AA0BEC7B2606BF1900549F18 /* Info.plist */,
 				AA0BEC782606BF1900549F18 /* Preview Content */,
