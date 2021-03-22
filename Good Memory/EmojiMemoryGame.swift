@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-class EmojiMemoryGame: ObservedObject {
-    @Published private var model: EmojiMemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+class EmojiMemoryGame: ObservableObject {
+    @Published private var model: MemoryGame = EmojiMemoryGame.createMemoryGame()
     private static func createMemoryGame() -> MemoryGame<String>{
         let emojis = ["👻", "😅", "🥵", "😇"]
         return MemoryGame<String>(numberOfPairsOfCards: emojis.count){ pairIndex in
             return emojis[pairIndex]
-        }
+        } 
     }
 
     //MARK: - Access to the Model
@@ -23,7 +23,7 @@ class EmojiMemoryGame: ObservedObject {
     
     //MARK: - Intet(s)
     
-    func choose(card: MemoryGame<String>){
+    func choose(card: MemoryGame<String>.Card){
         model.choose(card: card)
     }
 }

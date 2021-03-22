@@ -11,26 +11,27 @@ struct EmojiMemoryGameView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View{
-        Grid (viewModel.cards){ cards in
-            CardView(card: card).onTapGesture{
+        Grid(viewModel.cards) { card in
+            CardView(card: card).onTapGesture {
                 self.viewModel.choose(card: card)
         }
             .padding(5)
-    }
+    } 
         .padding()
         .foregroundColor(Color.orange)
+    }
 }
 
-    struct  CardView: View {
-        var card: MemoryGame<String>.Card
-        var body: some View{
-            GeometryReader{ geometry in
-                self.body(for: geometry.size)
-            }
+struct  CardView: View {
+    var card: MemoryGame<String>.Card
+    var body: some View{
+        GeometryReader{ geometry in
+            self.body(for: geometry.size)
         }
     }
+
     @ViewBuilder
-    private func body (for: size: CGSize) -> some View{
+    private func body (for size: CGSize) -> some View{
         if card.isFaceUp || !card.isMatched{
             ZStack{
                 Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90)).padding(5).opacity(0.5)
@@ -43,7 +44,7 @@ struct EmojiMemoryGameView: View {
     //MARK: - Drawing Constants
     
     private func fontSize(for size:CGSize) -> CGFloat{
-        min(size.width, size.height) *0.7
+        min(size.width, size.height)*0.7
     }
 }
     
@@ -56,6 +57,6 @@ struct EmojiMemoryGameView: View {
     
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }
