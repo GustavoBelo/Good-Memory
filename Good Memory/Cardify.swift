@@ -42,12 +42,32 @@ struct Cardify: AnimatableModifier {
         )
 
     }
-    private let cornerRadius:CGFloat = 10.0
     private let edgeLineWidth:CGFloat = 3.0
 }
+
+struct MenuCardify: ViewModifier {
+    func body(content: Content) -> some View{
+        ZStack{
+            Group{
+                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.pink)
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                content
+            }.frame(width: frameWidth, height: frameHeight, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+        }
+    }
+    private let frameWidth: CGFloat = 300
+    private let frameHeight: CGFloat = 180
+}
+
+fileprivate let cornerRadius:CGFloat = 10.0
+fileprivate let edgeLineWidth:CGFloat = 3.0
 
 extension View{
     func cardify(isFaceUp: Bool) -> some View{
         self.modifier(Cardify(isFaceUp: isFaceUp))
+    }
+    
+    func menuCardify() -> some View {
+        self.modifier(MenuCardify())
     }
 }

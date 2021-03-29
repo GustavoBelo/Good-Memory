@@ -7,8 +7,68 @@
 
 import SwiftUI
 
-struct EmojiMemoryGameView: View {
+struct ChooseContentView: View {
+    @State var showingGame: Bool
+    @State var mode: Int
+    
+    var body: some View {
+        if showingGame {
+            EmojiMemoryGameView(viewModel: EmojiMemoryGame(mode: mode), showingGame: $showingGame )
+        }
+        else {
+            EmojiMemoryGameFirstView(showingGame: $showingGame, mode: $mode)
+        }
+    }
+}
+
+struct EmojiMemoryGameFirstView: View {
+    @Binding var showingGame: Bool
+    @Binding var mode: Int
+    
+    var body: some View {
+        Group{
+            Button(action: {
+                withAnimation(){
+                    mode = 1
+                    showingGame = true
+                }
+            }, label: {
+                ZStack{
+                    Text("Modo fácil! 😅")
+                }
+                .menuCardify()
+            })
+            Button(action: {
+                withAnimation(){
+                    mode = 2
+                    showingGame = true
+                }
+            }, label: {
+                ZStack{
+                    Text("FEITO PRA VOCÊ 😠")
+                }
+                .menuCardify()
+            })
+            Button(action: {
+                withAnimation(){
+                    mode = 3
+                    showingGame = true
+                }
+            }, label: {
+                ZStack{
+                    Text("Modo IMPOSSÍVEL! 😰")
+                }
+                .menuCardify()
+            })
+        }
+        .foregroundColor(.white)
+        .padding(5)
+    }
+}
+
+struct EmojiMemoryGameView: View { 
     @ObservedObject var viewModel: EmojiMemoryGame
+    @Binding var showingGame: Bool
     
     var body: some View{
         VStack{
@@ -22,15 +82,14 @@ struct EmojiMemoryGameView: View {
         }
             .padding()
             .foregroundColor(Color.orange)
-            
-            Button(action: {
-                withAnimation(.easeInOut(duration: easeInOutDuration)){
-                    self.viewModel.resetGame()
-                }
-            }, label: {
-                Text("Novo jogo")
-            })
         }
+        Button(action: {
+            withAnimation(){
+                showingGame = false
+            }
+        }, label: {
+            Text("Novo jogo")
+        })
     }
 }
 
@@ -75,6 +134,9 @@ struct  CardView: View {
             .cardify(isFaceUp: card.isFaceUp)
             .transition(AnyTransition.offset(x: xOffSet, y: yOffSet))
         }
+//        if card.bonusTimeRemaining == 0 && !card.isMatched {
+//
+//        }
     }
     //MARK: - Drawing Constants
     
@@ -95,6 +157,8 @@ private let yOffSet: CGFloat = -(xOffSet)
     
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+//        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
+//        EmojiMemoryGameFirstView()
+        ChooseContentView(showingGame: false, mode: 2)
     }
 }

@@ -18,7 +18,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
     }
-    
+
     mutating func choose(card: Card){
         if let chosenIndex = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched{
             if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard{
@@ -33,8 +33,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
-    init(numberOfPairsOfCards: Int, cardCardContentFactory:(Int) -> CardContent){
+    init(numberOfPairsOfCards: Int, cardCardContentFactory:(Int) -> CardContent, difficulty: Int){
         cards = Array<Card>()
+        
+        switch difficulty {
+            case 1: cardTime = 8.0
+            case 2: cardTime = 5.0
+            case 3: cardTime = 3.0
+            default: cardTime = 5.0
+        }
+
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = cardCardContentFactory(pairIndex)
             cards.append(Card(content: content, id: pairIndex*2))
@@ -66,7 +74,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
          
          can be zero which means "no bonus avaiable" for this card
          */
-        var bonusTimeLimit: TimeInterval = 3
+                
+        var bonusTimeLimit: TimeInterval = TimeInterval(cardTime)
         
         // how long this card has ever been face up
         private var faceUpTime: TimeInterval {
@@ -112,3 +121,4 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
 }
 
+var cardTime = 5.0
